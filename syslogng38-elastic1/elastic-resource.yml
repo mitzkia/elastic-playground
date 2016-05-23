@@ -1,0 +1,9 @@
+discovery.zen.ping.unicast.hosts: ["192.168.10.1:9300"]
+network.publish_host: 192.168.10.11
+network.bind_host: 0.0.0.0
+path.home: /usr/share/elasticsearch
+shield.user: elasticsearch:qqq123
+shield.transport.ssl: true
+shield.ssl.keystore.path: /install/syslog-ng/client.jks
+shield.ssl.keystore.password: qqq123
+cluster.name: "elastic1"

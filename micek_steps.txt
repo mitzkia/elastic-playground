@@ -1,0 +1,11 @@
+send to elasticsearch:
+> curl -v -XPUT 'http://elasticsearch:9200/twitter/tweet/1' -d '{"message": "trying out Elasticsearch" }'
+
+query from elasticsearch:
+> curl -v -XGET 'http://elasticsearch:9200/twitter/tweet/1'
+
+get data from elastic2 (shield in on):
+> curl -XGET --user elasticsearch:password "http://localhost:9200/_cluster/health?pretty=true"
+
+connect to ssl elastic2
+> curl --insecure --cacert rootCA.crt --tlsv1 -u elasticsearch https://192.168.10.3:9200
