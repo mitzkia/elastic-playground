@@ -1,8 +1,8 @@
 FROM balabit/syslog-ng-dev:latest
 MAINTAINER <andras.mitzki@balabit.com>
 
-RUN apt update -qq
-RUN git clone https://github.com/balabit/syslog-ng.git /src/syslog-ng
+RUN apt-get update -qq
+RUN git clone -b f/elasticsearch-v2-mode-http https://github.com/lbudai/syslog-ng.git /src/syslog-ng
 RUN pip install -r /src/syslog-ng/requirements.txt
 WORKDIR /src/syslog-ng/
 RUN ./autogen.sh

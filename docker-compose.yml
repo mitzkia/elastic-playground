@@ -5,42 +5,49 @@ services:
         hostname: elastic1
         networks:
           app_net:
-            ipv4_address: 192.168.10.1
+            ipv4_address: 192.168.20.1
         ports:
             - "9200"
             - "9300"
-        # volumes:
-        command: "gosu elasticsearch:elasticsearch bash -c '/usr/share/elasticsearch/bin/elasticsearch --path.conf=/etc/elasticsearch'"
+        volumes:
+            - ./elastic1/config/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
+        environment:
+            ES_JAVA_OPTS: "-Des.path.conf=/etc/elasticsearch"
+        # command: "gosu elasticsearch:elasticsearch bash -c '/usr/share/elasticsearch/bin/elasticsearch --path.conf=/etc/elasticsearch'"
     elastic2:
         image: micek/elastic2:latest
         hostname: elastic2
         networks:
           app_net:
-            ipv4_address: 192.168.10.2
+            ipv4_address: 192.168.20.2
         ports:
             - "9200"
             - "9300"
-        # volumes:
-        command: "gosu elasticsearch:elasticsearch bash -c '/usr/share/elasticsearch/bin/elasticsearch --path.conf=/etc/elasticsearch'"
+        volumes:
+            - ./elastic2/config/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
+        environment:
+            ES_JAVA_OPTS: "-Des.path.conf=/etc/elasticsearch"
+        # command: "gosu elasticsearch:elasticsearch bash -c '/usr/share/elasticsearch/bin/elasticsearch --path.conf=/etc/elasticsearch'"
     elastic5:
         image: micek/elastic5:latest
         hostname: elastic5
         networks:
           app_net:
-            ipv4_address: 192.168.10.3
+            ipv4_address: 192.168.20.3
         ports:
             - "9200"
             - "9300"
-        # volumes:
+        volumes:
+            - ./elastic5/config/elasticsearch.yml:/etc/elasticsearch/elasticsearch.yml
         environment:
             ES_JAVA_OPTS: "-Xms1g -Xmx1g"
-        command: "/elasticsearch-5.0.0-alpha2/bin/elasticsearch"
+        # command: "/elasticsearch-5.0.0-alpha2/bin/elasticsearch"
     syslogng38-elastic1:
         image: micek/syslogng38-elastic1:latest
         hostname: slng-elastic1
         networks:
           app_net:
-            ipv4_address: 192.168.10.11
+            ipv4_address: 192.168.20.11
         ports:
             - "5555"
         # volumes:
@@ -52,7 +59,7 @@ services:
         hostname: slng-elastic2
         networks:
           app_net:
-            ipv4_address: 192.168.10.12
+            ipv4_address: 192.168.20.12
         ports:
             - "5555"
         # volumes:
@@ -64,7 +71,7 @@ services:
         hostname: slng-elastic5
         networks:
           app_net:
-            ipv4_address: 192.168.10.13
+            ipv4_address: 192.168.20.13
         ports:
             - "5555"
         # volumes:
@@ -79,5 +86,5 @@ networks:
     ipam:
       driver: default
       config:
-      - subnet: 192.168.10.0/24
-        gateway: 192.168.10.254
+      - subnet: 192.168.20.0/24
+        gateway: 192.168.20.254
